@@ -1,7 +1,7 @@
 # FE2: Einsatz per API anlegen
 
-Trage in beiden Skripten den generierten Schlüssel bei `API_TOKEN` ein. Das von
-FE2 übergebene Stichwort wird als JSON-Attribut `title` per POST an
+Trage in beiden Skripten den generierten Schlüssel bei `API_TOKEN` ein. 
+Das von FE2 übergebene Stichwort (mehrere Argumente werden mit Leerzeichen zusammengefügt) wird als JSON-Attribut `title` und die aktuelle Uhrzeit als `alarm_time` per POST an
 `https://app.trackdeineneinsatz.de/api_einsatz.php` gesendet.
 
 ## FE2 konfigurieren
