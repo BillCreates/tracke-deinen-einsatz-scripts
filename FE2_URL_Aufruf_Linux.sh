@@ -1,22 +1,6 @@
 #!/usr/bin/env sh
 
-# API-URL und API-Key hier eintragen.
-API_URL='https://app.trackdeineneinsatz.de/api_einsatz.php'
-API_TOKEN='sk_live_dein_generierter_schluessel_hier'
+# Bei Bedarf vollstaendigen Pfad zu python3 eintragen (der FE2-Dienst hat oft einen anderen PATH).
+PYTHON='python3'
 
-if [ -z "$*" ]; then
-  echo 'Fehler: Kein Einsatzstichwort uebergeben.' >&2
-  exit 2
-fi
-
-if [ -z "$API_TOKEN" ]; then
-  echo 'Fehler: API_TOKEN ist nicht gesetzt.' >&2
-  exit 2
-fi
-
-PAYLOAD=$(python3 -c 'import json, sys; from datetime import datetime; print(json.dumps({"title": " ".join(sys.argv[1:]), "alarm_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}, ensure_ascii=False))' "$@") || exit 1
-curl --fail --silent --show-error -X POST \
-  -H 'Content-Type: application/json' \
-  -H "X-API-Key: $API_TOKEN" \
-  --data-binary "$PAYLOAD" \
-  "$API_URL"
+exec "$PYTHON" -X utf8 "$(dirname "$0")/FE2_URL_Aufruf.py" "$@"
